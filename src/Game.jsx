@@ -75,8 +75,41 @@ const Game = ({ onClose }) => {
             });
         };
 
+        const moveCharacter = (direction) => {
+            if (gameWon) return;
+            if (!gameStarted) setGameStarted(true);
+
+            setCharacterPos((prev) => {
+                let newX = prev.x;
+                let newY = prev.y;
+
+                switch (direction) {
+                    case 'up':
+                        newY = Math.max(0, prev.y - MOVE_SPEED);
+                        break;
+                    case 'down':
+                        newY = Math.min(window.innerHeight - CHARACTER_SIZE, prev.y + MOVE_SPEED);
+                        break;
+                    case 'left':
+                        newX = Math.max(0, prev.x - MOVE_SPEED);
+                        break;
+                    case 'right':
+                        newX = Math.min(window.innerWidth - CHARACTER_SIZE, prev.x + MOVE_SPEED);
+                        break;
+                    default:
+                        return prev;
+                }
+                return { x: newX, y: newY };
+            });
+        };
+
+        window.moveCharacter = moveCharacter; // Expose to buttons
+
         window.addEventListener('keydown', handleKeyPress);
-        return () => window.removeEventListener('keydown', handleKeyPress);
+        return () => {
+            window.removeEventListener('keydown', handleKeyPress);
+            delete window.moveCharacter;
+        };
     }, [gameWon, gameStarted]);
 
     // Touch controls for mobile
@@ -213,6 +246,16 @@ const Game = ({ onClose }) => {
                     ❤️
                 </div>
             ))}
+
+            {/* Mobile D-pad */}
+            <div className="d-pad">
+                <button className="d-btn up" onTouchStart={() => window.moveCharacter('up')} onClick={() => window.moveCharacter('up')}>▲</button>
+                <div className="d-pad-middle">
+                    <button className="d-btn left" onTouchStart={() => window.moveCharacter('left')} onClick={() => window.moveCharacter('left')}>◀</button>
+                    <button className="d-btn down" onTouchStart={() => window.moveCharacter('down')} onClick={() => window.moveCharacter('down')}>▼</button>
+                    <button className="d-btn right" onTouchStart={() => window.moveCharacter('right')} onClick={() => window.moveCharacter('right')}>▶</button>
+                </div>
+            </div>
         </div>
     );
 };
