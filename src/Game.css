@@ -172,11 +172,11 @@
         font-size: 20px;
     }
 
-    /* D-pad styles - top right */
+    /* D-pad styles - bottom left (raised) */
     .d-pad {
         position: absolute;
-        top: 80px;
-        right: 20px;
+        bottom: 100px;
+        left: 20px;
         display: flex;
         flex-direction: column;
         align-items: center;
