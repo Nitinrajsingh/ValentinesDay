@@ -1,0 +1,183 @@
+.game-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(135deg, #ffd1dc 0%, #ffe4e9 100%);
+    overflow: hidden;
+    z-index: 1000;
+    touch-action: none;
+    user-select: none;
+}
+
+.game-header {
+    position: absolute;
+    top: 20px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+    z-index: 1001;
+}
+
+.score {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ff1493;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 10px 20px;
+    border-radius: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.close-btn {
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.close-btn:hover {
+    background: #fff;
+    transform: scale(1.1);
+}
+
+.game-instructions {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.9);
+    padding: 15px 30px;
+    border-radius: 25px;
+    font-size: 18px;
+    color: #ff1493;
+    font-weight: 500;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    z-index: 1001;
+}
+
+.character {
+    position: absolute;
+    transition: all 0.1s ease;
+    cursor: grab;
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.2));
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+}
+
+.character:active {
+    cursor: grabbing;
+}
+
+.heart {
+    position: absolute;
+    font-size: 40px;
+    animation: float 3s ease-in-out infinite;
+    cursor: pointer;
+    filter: drop-shadow(0 2px 8px rgba(255, 20, 147, 0.4));
+}
+
+.heart:nth-child(odd) {
+    animation-delay: 0.5s;
+}
+
+.heart:nth-child(even) {
+    animation-delay: 1s;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0px) scale(1);
+    }
+
+    50% {
+        transform: translateY(-10px) scale(1.1);
+    }
+}
+
+/* Speech bubble */
+.speech-bubble {
+    position: absolute;
+    background: white;
+    padding: 15px 20px;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    font-size: 16px;
+    color: #ff1493;
+    font-weight: 600;
+    max-width: 250px;
+    z-index: 1002;
+    animation: bounce-in 0.5s ease-out;
+    line-height: 1.4;
+}
+
+.speech-bubble::before {
+    content: '';
+    position: absolute;
+    left: -10px;
+    top: 20px;
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 10px solid white;
+}
+
+@keyframes bounce-in {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+    .score {
+        font-size: 18px;
+        padding: 8px 15px;
+    }
+
+    .game-instructions {
+        font-size: 14px;
+        padding: 10px 20px;
+        bottom: 20px;
+    }
+
+    .close-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 20px;
+    }
+}
+
+/* Prevent text selection during game */
+.game-container * {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}

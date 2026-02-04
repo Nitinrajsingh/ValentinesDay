@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 
 
 import MouseStealing from './MouseStealer.jsx';
+import Game from './Game.jsx';
 import Lovegif from "./assets/GifData/main_temp.gif";
 import heartGif from "./assets/GifData/heart.gif";
 import sadGif from "./assets/GifData/sad.gif";
@@ -43,6 +44,7 @@ export default function Page() {
   const [currentGifIndex, setCurrentGifIndex] = useState(0); // Track the current gif index
   const [popupShown, setPopupShown] = useState(false);
   const [yespopupShown, setYesPopupShown] = useState(false);
+  const [showGame, setShowGame] = useState(false);
 
   const gifRef = useRef(null); // Ref to ensure gif plays infinitely
   const yesButtonSize = noCount * 16 + 16;
@@ -172,7 +174,6 @@ export default function Page() {
       "Are you sure?",
       "Really sure?",
       "Think again!",
-      "I thought you were an innocent sweet girl 🥺",
       "Pretty please?",
       "Have a heart! ❤️",
       "I'm not giving up!",
@@ -274,6 +275,13 @@ export default function Page() {
             />
             <div className="text-4xl md:text-6xl font-bold my-2" style={{ fontFamily: "Charm, serif", fontWeight: "700", fontStyle: "normal" }}>Я тебе хочу!</div>
             <div className="text-4xl md:text-4xl font-bold my-1" style={{ fontFamily: "Beau Rivage, serif", fontWeight: "500", fontStyle: "normal" }}> Miss pretty eyes </div>
+            <button
+              onClick={() => setShowGame(true)}
+              className="bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-6 rounded-lg mt-6 animate-bounce"
+              style={{ fontSize: "20px" }}
+            >
+              🎮 Click me for cute gift!
+            </button>
 
           </>
         ) : (
@@ -326,9 +334,11 @@ export default function Page() {
 
         <Footer />
       </div>
+
+      {showGame && <Game onClose={() => setShowGame(false)} />}
     </>
   );
-}
+};
 
 const Footer = () => {
   return (
