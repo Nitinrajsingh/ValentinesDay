@@ -181,6 +181,8 @@ const Game = ({ onClose }) => {
                 icon: 'success',
                 confirmButtonText: 'Yay!',
                 confirmButtonColor: '#ff69b4',
+                allowOutsideClick: false,
+                allowEscapeKey: false,
             }).then(() => {
                 onClose();
             });
